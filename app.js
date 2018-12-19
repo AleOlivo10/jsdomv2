@@ -1,28 +1,61 @@
-var banner = document.querySelector('#page-banner');
-console.log('#page-banner node type is:', banner.nodeType) //node type is 1
-console.log('#page-banner node name is:', banner.nodeName)  //node name is DIV (the type of element this is --> <div id="page-banner"> )
-console.log('#page-banner has child nodes:', banner.hasChildNodes()) //has children? true
+//DOM TRAVERSAL (PARENT AND CHILD)
 
-var clonedBanner = banner.cloneNode(true);  //by making the cloneNode() method true it tells cloneNode to clone the children as well as the individual line
-console.log(clonedBanner);                  //clones everything from the <div> to </div> if you put false then it doesnt include anything that was nested
+var bookList = document.querySelector('#book-list');
 
+console.log('the parent node is:', bookList.parentNode); // you get| the parent node is: <div id="wrapper">...</div>  | containing all the nested stuff inside of "..."
+//                                                        <div id="wrapper"> is the direct parent of #book-list
 
+//.parentElement and .parentNode are two ways to do the same thing and get the same result
 
-
-
+console.log('the parent element is:', bookList.parentElement);                //is the same way to ask the above line. gives the same answer
 
 
-
-
+console.log('the parent element is:', bookList.parentElement.parentElement);  //gives the parent of the parent.
+//                                                                            The parent of <div id="wrapper">...</div> is <body>...</body>
 
 
 
+//PARENTS ABOVE
+//----------------------------
+//CHILDREN BELOW
 
-// const banner = document.querySelector('#page-banner');
+console.log(bookList.childNodes); //you get a node list--> NodeList(5) [text, h2.title, text, ul, text] | is too detailed and not ideal. gives info on line breaks
 
-// console.log('#page-banner node type is:', banner.nodeType);
-// console.log('#page-banner node name is:', banner.nodeName);
-// console.log('#page-banner has child nodes:', banner.hasChildNodes());
+console.log(bookList.children); //you get HTML collection--> HTMLCollection(2) [h2.title, ul] | is best because it gives only pertinent info on children
 
-// const clonedBanner = banner.cloneNode(true);
-// console.log(clonedBanner);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const bookList = document.querySelector('#book-list');
+
+// console.log('book list parent element:', bookList.parentElement);
+// console.log('book list parent node:', bookList.parentNode);
+
+// console.log('all node children:');
+// Array.from(bookList.childNodes).forEach(function(node){
+//   console.log(node);
+// });
+
+// console.log('all element children:');
+// Array.from(bookList.children).forEach(function(node){
+//   console.log(node);
+// });
+
+// const titles = bookList.querySelectorAll('.name');
+
+// console.log('Book titles:');
+// Array.from(titles).forEach(function(title){
+//   console.log(title.textContent);
+// });
