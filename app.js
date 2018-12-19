@@ -1,38 +1,10 @@
-//can cycle through #book-list without turning it into an array using querySelectorAll because it returns a nodelist and not an HTMLcollection
-// books.forEach is now possible (like a for loop)
+var banner = document.querySelector('#page-banner');
+console.log('#page-banner node type is:', banner.nodeType) //node type is 1
+console.log('#page-banner node name is:', banner.nodeName)  //node name is DIV (the type of element this is --> <div id="page-banner"> )
+console.log('#page-banner has child nodes:', banner.hasChildNodes()) //has children? true
 
-//if you use document.getElementById then YOU DO need to turn it into an array first by doing - Array.from(variableEqualToHTMLcollection) -
-
-// NOTES ABOVE ^^
-// --------------------------------------------------------------------------------------
-
-
-var books = document.querySelectorAll('#book-list li .name');
-
-Array.from(books).forEach(function(book) {
-    console.log(book.textContent)
-})
-
-// ^^RETURNS THE TITLES OF THE BOOKS IN THE INDEX.HTML file ^^
-
-// Array.from(books).forEach(function(book) {
-//     book.textContent = 'test'
-// })
-
-// ^^TURNS ALL OF THE TITLES INTO THE WORD 'test'
-
-Array.from(books).forEach(function(book) {
-    book.textContent += '(book title)';
-})
-
-// ^^^ RETURNS The Wise Man's Fear (book title) as a line, but for all of the lines (with titles still individualized)
-// ^^ += means 'keep this the same but also, add this extra thing in'
-
-var booklist = document.querySelector('#book-list')
-booklist.innerHTML = '<h2>Books & More Books...</h2>'
-booklist.innerHTML += '<p>This is how you add HTML...</p>'
-
-//comment out the above lines and see what they do. big differences. noticable
+var clonedBanner = banner.cloneNode(true);  //by making the cloneNode() method true it tells cloneNode to clone the children as well as the individual line
+console.log(clonedBanner);                  //clones everything from the <div> to </div> if you put false then it doesnt include anything that was nested
 
 
 
@@ -40,10 +12,17 @@ booklist.innerHTML += '<p>This is how you add HTML...</p>'
 
 
 
-// Array.from(books).forEach(function(book){
-//   book.textContent += ' (Book title)';
-// });
 
-// const bookList = document.querySelector('#book-list');
-// bookList.innerHTML = '<h2>Books and more books...</h2>';
-// bookList.innerHTML += '<p>This is how you add HTML content</p>';
+
+
+
+
+
+// const banner = document.querySelector('#page-banner');
+
+// console.log('#page-banner node type is:', banner.nodeType);
+// console.log('#page-banner node name is:', banner.nodeName);
+// console.log('#page-banner has child nodes:', banner.hasChildNodes());
+
+// const clonedBanner = banner.cloneNode(true);
+// console.log(clonedBanner);
