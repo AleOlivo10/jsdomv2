@@ -1,53 +1,25 @@
-//DOM EVENTS AND REMOVING CONTENT FROM THE DOM
+//EVENT BUBBLING
 
-//an event is the action happening on the browser. When you press the 'delete' button thats a click event. When you hit the space inside the search bar and it shows that line that means its ready to write text, that's a key-press event. When you hit 'add' to add a book to the list, that's a submit event.
+//in a sense, event bubbling is an event bubbling its way up the DOM treeS
 
-//we add event-listeners to the elements we want to listen to events on
+//the last version of the event listener code we did was inefficient and we're going to improve upon it in this lesson. was inefficient because we had to attach an event listener function to each <span> with a class of 'delete' but if we added a new <li> inside of <ul>, it wouldnt be connected to the event listener and nothing would happen when you pressed that button. also, it takes more effort that necessary for the computer to set one event listener to one button because what if we have a ton of buttons?
 
-var h2 = document.querySelector('#book-list h2')
-
-//there are many kinds of events. for example I could have put 'keypress' instead of 'click'
-//the function inside of the the addEventListener tells the code what to do once it's 'heard' something. It is a callback function
-//'action' is a made up name for my parameter
-
-h2.addEventListener('click', function (action) {
-  console.log(action.target)
-  console.log(action)
-})  
-
-//the code above has to be entered into the inspect-console so you can see what happens when you click on h2
-
-
-// -------------------------------------------------------
-
-
-//book-list is the DIV id where the list of books is contained. delete is the class for all of he buttons
-//we cant do btns.addEventListener() because delete buttons are a collection of elements, not a single one
-//we want to loop through them and add an event listener to each one, which means we need to turn this collection into an array
-//when click happens the code removes the <li> so that the title is deleted
-
-
-var btns = document.querySelectorAll('#book-list.delete')
-
-Array.from(btns).forEach(function(btns) {
-  btns.addEventListener('click', function(action) {
-    
-    var li = action.target.parentElement    //what we want to happen when click happens
-    li.parentNode.removeChild(li)              //parent of <li> is <ul>, which is why we're telling <li>'s parent to remove it's child
-    
-  })
+var list = document.querySelector('#book-list ul');
+//adding eventListener to var list in line 9
+list.addEventListener('click', function(action) {
+    //action is equal to the purple 'delete' button. target just means that's what you're specifying is the target for the event
+    //in other words, we're specifying that the target for the eventListener is the item with the className of 'delete'
+    if (action.target.className == 'delete') {
+        //when button is clicked, it will grab the li associated with 'delete' className
+        var li = action.target.parentElement
+        //parent of <li> (which is <ul>) is being told to remove it's child (which is <li>)
+        list.removeChild(li)        //list is already equal to <ul> , we did that in the first line
+    }
 })
 
-// -----------------------------------------------
-//GOTTA BE HONEST, I JUST COPY/PASTED BELOW WHAT WAS ALREADY THERE
- // prevent default behaviour
+//I added an additional button (there are now 5 on the browser) and only the first 4 have an event listener attached
 
-const link = document.querySelector('#page-banner a');
-
-link.addEventListener('click', function(e){
-  e.preventDefault();
-  console.log('Navigation to', e.target.textContent, 'was prevented');
-});
+//the above code ensures that all of the 'delete' buttons work becuase it attached a click event listener to the <ul>
 
 
 
@@ -60,24 +32,16 @@ link.addEventListener('click', function(e){
 
 
 
-// const listItems = document.querySelectorAll('#book-list ul li');
 
-// Array.from(listItems).forEach(function(item){
-//   item.addEventListener('click', (e) => {
 
+
+
+// const list = document.querySelector('#book-list ul');
+
+// // delete books
+// list.addEventListener('click', (e) => {
+//   if(e.target.className == 'delete'){
 //     const li = e.target.parentElement;
-//     console.log('child element to remove:', li);
-//     console.log('parent element to remove child from:', li.parentElement);
 //     li.parentNode.removeChild(li);
-
-//   });
-// });
-
-// // prevent default behaviour
-
-// const link = document.querySelector('#page-banner a');
-
-// link.addEventListener('click', function(e){
-//   e.preventDefault();
-//   console.log('Navigation to', e.target.textContent, 'was prevented');
+//   }
 // });
